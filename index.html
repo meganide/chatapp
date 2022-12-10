@@ -132,10 +132,8 @@
           exists = false;
           const usersElem = document.querySelector('#users');
           for (const child of usersElem.children) {
-            console.log({ name, childContent: child.textContent });
             if (child.textContent === name) {
               exists = true;
-              console.log('sanning');
             }
           }
           if (!exists) {
@@ -169,12 +167,14 @@
       });
 
       socket.on('user disconnected', (user) => {
-        console.log(user);
+        console.log("user disconnected!")
         const time = getCurrentTime();
         sendMessage(`${time}: ${user} left the chatroom!`);
         const usersElem = document.querySelector('#users');
         for (const child of usersElem.children) {
+          console.log(child)
           if (child.textContent === user) {
+            console.log("user disconnected, remove!")
             child.remove();
           }
         }
